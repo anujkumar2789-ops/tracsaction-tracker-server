@@ -54,6 +54,7 @@ const categorySchema = new mongoose.Schema({
   type: { type: String, enum: ['expense', 'income'], default: 'expense' },
   icon: { type: String, default: 'Tag' },
   color: { type: String, default: '#6366F1' },
+  keywords: { type: [String], default: [] },
   isDefault: { type: Boolean, default: false }
 });
 

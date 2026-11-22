@@ -3,7 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');
-const { setMongoConnected } = require('./store');
+const { setMongoConnected, getMongoStatus } = require('./store');
 
 dotenv.config();
 
@@ -46,6 +46,8 @@ app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
     message: 'Mobile Personal Expense Tracker API is running smoothly',
+    database: getMongoStatus() ? 'MongoDB Atlas (Connected)' : (process.env.MONGODB_URI ? 'Connecting to MongoDB Atlas...' : 'Local File Store (data_store.json)'),
+    mongoConnected: getMongoStatus(),
     timestamp: new Date().toISOString()
   });
 });
